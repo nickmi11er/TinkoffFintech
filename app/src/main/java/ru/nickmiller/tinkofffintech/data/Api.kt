@@ -4,6 +4,8 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 import ru.nickmiller.tinkofffintech.data.entity.ApiResponse
+import ru.nickmiller.tinkofffintech.data.entity.course.CoursesResponse
+import ru.nickmiller.tinkofffintech.data.entity.event.EventInfo
 import ru.nickmiller.tinkofffintech.data.entity.event.Events
 import ru.nickmiller.tinkofffintech.data.entity.profile.Profile
 import ru.nickmiller.tinkofffintech.data.entity.profile.UserResponse
@@ -21,8 +23,14 @@ interface Api {
     @GET("calendar/list/event")
     fun getEvents(): Observable<Events>
 
+    @GET
+    fun getEventInfo(@Url url: String): Observable<EventInfo>
+
     @GET("user")
-    fun getUserProfile(): Call<UserResponse>
+    fun getUserProfile(): Observable<UserResponse>
+
+    @GET("connections")
+    fun getCourses(): Observable<CoursesResponse>
 }
  
  
