@@ -12,6 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.nickmiller.tinkofffintech.BuildConfig
 import ru.nickmiller.tinkofffintech.data.Api
+import ru.nickmiller.tinkofffintech.data.repository.CoursesRepository
 import ru.nickmiller.tinkofffintech.data.repository.EventsRepository
 import ru.nickmiller.tinkofffintech.data.repository.LoginRepository
 import ru.nickmiller.tinkofffintech.data.repository.ProfileRepository
@@ -26,13 +27,14 @@ import ru.nickmiller.tinkofffintech.utils.cookies.GetCookiesInterceptor
 
 
 val mainModule: Module = module {
-    viewModel { ProfileViewModel() }
+    viewModel { ProfileViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { EventsViewModel(get()) }
-    viewModel { CoursesViewModel() }
+    viewModel { CoursesViewModel(get()) }
     single { LoginRepository(get(), get()) }
-    single { ProfileRepository(get()) }
+    single { ProfileRepository(get(), get()) }
     single { EventsRepository(get(), get()) }
+    single { CoursesRepository(get(), get()) }
 }
 
 val networkModule: Module = module {
