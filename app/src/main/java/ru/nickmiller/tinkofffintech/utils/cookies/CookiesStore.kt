@@ -11,7 +11,7 @@ import kotlin.collections.HashSet
 class CookiesStore(val context: Context) {
 
     private val COOKIES_KEY = "cookies"
-    val sdf = SimpleDateFormat("d-MMM-yyyy HH:mm:ss", Locale.getDefault())
+    val sdf = SimpleDateFormat("d-MMM-yyyy HH:mm:ss", Locale.US)
     val expiresPatter =
         "expires=.+(\\d{2}-\\w{3}-\\d{4}\\s\\d{2}:\\d{2}:\\d{2})".toRegex(RegexOption.IGNORE_CASE)
 
