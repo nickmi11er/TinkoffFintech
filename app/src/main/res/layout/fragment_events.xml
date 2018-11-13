@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.events.EventsFragment">
+
+    <include android:id="@+id/app_bar"
+             layout="@layout/view_toolbar"/>
+
+    <android.support.v4.widget.NestedScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:id="@+id/events_container_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar">
+
+            <ru.nickmiller.tinkofffintech.ui.events.EventsContainer
+                    android:layout_margin="8dp"
+                    android:id="@+id/events_actual"
+                    app:events_type="Актуальное"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <ru.nickmiller.tinkofffintech.ui.events.EventsContainer
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/events_archive"
+                    app:events_type="Прошедшие"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>
