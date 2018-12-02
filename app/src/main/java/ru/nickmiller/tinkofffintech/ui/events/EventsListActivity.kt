@@ -11,6 +11,7 @@ import android.view.Menu
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import ru.nickmiller.tinkofffintech.R
 import ru.nickmiller.tinkofffintech.data.entity.event.Event
+import ru.nickmiller.tinkofffintech.ui.events.details.EventDetailsDialog
 import ru.nickmiller.tinkofffintech.utils.find
 
 
@@ -28,7 +29,7 @@ class EventsListActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        searchView.setHint("Поиск мероприятий")
+        searchView.setHint(getString(R.string.title_events_search))
         searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 adapter?.filter?.filter(query)
@@ -46,8 +47,15 @@ class EventsListActivity : AppCompatActivity() {
         val events = intent.getParcelableArrayListExtra<Event>(EVENTS)
 
         val (title, adapter) = when (eventsType) {
-            EventsType.ACTUAL -> Pair("Актуальное", EventsAdapter(this, events.toList(), true, true))
-            EventsType.ARCHIVE -> Pair("Прошедшие", EventsAdapter(this, events.toList(), large = true))
+            EventsType.ACTUAL ->
+                getString(R.string.title_events_actual) to EventsAdapter(this, events.toList(), true, true)
+            EventsType.ARCHIVE -> {
+                val adapter = EventsAdapter(this, events.toList(), large = true)
+                adapter.addOnEventClickListener {
+                    EventDetailsDialog.showEventDetails(supportFragmentManager, it)
+                }
+                getString(R.string.title_events_archived) to adapter
+            }
         }
 
         this.title = title

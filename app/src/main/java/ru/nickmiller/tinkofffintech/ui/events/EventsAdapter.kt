@@ -7,12 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import ru.nickmiller.tinkofffintech.R
 import ru.nickmiller.tinkofffintech.data.entity.event.Event
+import ru.nickmiller.tinkofffintech.ui.events.details.EventDetailsActivity
 import ru.nickmiller.tinkofffintech.utils.find
 
 
-class EventsAdapter(val context: Context?, var events: List<Event>, val isActual: Boolean = false, val large: Boolean = false) :
+class EventsAdapter(
+    val context: Context?,
+    var events: List<Event>,
+    val isActual: Boolean = false,
+    val large: Boolean = false
+) :
     RecyclerView.Adapter<EventsViewHolder>(), Filterable {
 
     private val ITEM_DEFAULT_VIEWTYPE = 0
@@ -46,10 +53,19 @@ class EventsAdapter(val context: Context?, var events: List<Event>, val isActual
 
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
-        holder.bind(eventsFiltered[position])
+        val event = eventsFiltered[position]
+        holder.bind(event)
         holder.itemView.setOnClickListener {
-            if (eventClickListener != null) eventClickListener!!.invoke(eventsFiltered[position])
-            else EventDetailsActivity.start(context, eventsFiltered[position])
+            if (!event.description.isNullOrEmpty()) {
+                if (eventClickListener != null) eventClickListener!!.invoke(event)
+                else EventDetailsActivity.start(context, event)
+            } else {
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.error_null_event_description),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -66,7 +82,7 @@ class EventsAdapter(val context: Context?, var events: List<Event>, val isActual
                 events
             } else {
                 events.filter {
-                    it.title?.contains(charString, true) ?: false
+                    it.title.contains(charString, true) ?: false
                 }
             }
             return FilterResults().apply { values = eventsFiltered }

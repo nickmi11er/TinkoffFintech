@@ -21,9 +21,10 @@ data class EventData(
 
 
 @Parcelize
-data class Block (
-    @SerializedName("title") val title : String?,
-    @SerializedName("data") val data : Data?
+data class Block(
+    @SerializedName("angular_block_id") val blockId: String?,
+    @SerializedName("title") val title: String?,
+    @SerializedName("data") val data: Data?
 ) : Parcelable
 
 
@@ -32,14 +33,23 @@ data class Data(
     @SerializedName("type") val type: String?,
     @SerializedName("event_type_id") val eventTypeId: String?,
     val event_url: String?,
-    val button_text: String?,
+    @SerializedName("button_text") val buttonText: String?,
     @SerializedName("text") val text: String?,
     val action_link: String?,
     val registration: Boolean?,
+    @SerializedName("subtitle") val subtitle: String?,
     @SerializedName("about") val about: String?,
     @SerializedName("title") val title: String?,
-    val applied: Applied?
-    //val children: List<Any>?
+    val applied: Applied?,
+    @SerializedName("children") val childrens: List<Children>?
+) : Parcelable
+
+
+@Parcelize
+data class Children(
+    @SerializedName("title") val title: String?,
+    @SerializedName("angular_block_id") val blockId: String?,
+    @SerializedName("data") val data: Data?
 ) : Parcelable
 
 

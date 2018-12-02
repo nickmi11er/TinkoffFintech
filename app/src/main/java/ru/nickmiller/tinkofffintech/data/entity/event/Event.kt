@@ -1,5 +1,6 @@
 package ru.nickmiller.tinkofffintech.data.entity.event
 
+import android.arch.persistence.room.Entity
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -9,10 +10,12 @@ data class Events(
     @SerializedName("archive") val archive: List<Event> = listOf()
 )
 
+
+@Entity(tableName = "events", primaryKeys = ["title", "dateStart"])
 @Parcelize
 data class Event(
-    @SerializedName("title") val title: String?,
-    @SerializedName("date_start") val dateStart: String?,
+    @SerializedName("title") val title: String = "",
+    @SerializedName("date_start") val dateStart: String = "",
     @SerializedName("date_end") val dateEnd: String?,
     @SerializedName("event_type") val eventType: EventType?,
     @SerializedName("custom_date") val customDate: String?,
