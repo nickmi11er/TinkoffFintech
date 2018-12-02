@@ -1,12 +1,14 @@
 package ru.nickmiller.tinkofffintech.data
 
-data class Resource<out T>(val status: Status, val data: T?, val error: Throwable?) {
+import ru.nickmiller.tinkofffintech.BaseException
+
+data class Resource<out T>(val status: Status, val data: T?, val error: BaseException?) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
             return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(err: Throwable): Resource<T> {
+        fun <T> error(err: BaseException): Resource<T> {
             return Resource(Status.ERROR, null, err)
         }
 

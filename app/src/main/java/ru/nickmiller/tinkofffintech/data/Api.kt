@@ -4,6 +4,8 @@ import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 import ru.nickmiller.tinkofffintech.data.entity.ApiResponse
+import ru.nickmiller.tinkofffintech.data.entity.course.CourseAbout
+import ru.nickmiller.tinkofffintech.data.entity.course.CourseInfo
 import ru.nickmiller.tinkofffintech.data.entity.course.CoursesResponse
 import ru.nickmiller.tinkofffintech.data.entity.event.EventInfo
 import ru.nickmiller.tinkofffintech.data.entity.event.Events
@@ -31,6 +33,12 @@ interface Api {
 
     @GET("connections")
     fun getCourses(): Observable<CoursesResponse>
+
+    @GET
+    fun getCourseInfo(@Url url: String): Observable<List<CourseInfo>>
+
+    @GET
+    fun getCourseAbout(@Url url: String): Observable<CourseAbout>
 }
  
  
