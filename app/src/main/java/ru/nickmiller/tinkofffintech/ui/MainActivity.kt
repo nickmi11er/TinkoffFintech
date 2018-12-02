@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment): Boolean {
+        stopProgress()
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, fragment)
             .commit()
