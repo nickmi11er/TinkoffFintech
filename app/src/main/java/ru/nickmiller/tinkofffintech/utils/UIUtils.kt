@@ -11,6 +11,8 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateDecelerateInterpolator
+import ru.nickmiller.tinkofffintech.R
+
 
 inline fun <reified V : View> Activity.find(id: Int): V = findViewById(id)
 
@@ -40,5 +42,15 @@ fun dpToPx(context: Context, valueInDp: Float): Float {
     val metrics = context.resources.displayMetrics
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics)
 }
+
+
+fun softColorsArray() =
+    intArrayOf(
+        R.color.colorBlueSoft,
+        R.color.colorGreenSoft,
+        R.color.colorOrangeSoft,
+        R.color.colorRedSoft,
+        R.color.colorVioletSoft
+    )
  
  
