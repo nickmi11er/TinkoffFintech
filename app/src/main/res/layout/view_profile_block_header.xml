@@ -16,22 +16,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_contacts"
-            android:id="@+id/header_img"
+            android:id="@+id/headerImg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-            android:textColor="#333333"
+            android:textColor="@color/colorTextMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/header_title"
+            android:id="@+id/headerTitle"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toEndOf="@+id/header_img"
+            app:layout_constraintStart_toEndOf="@+id/headerImg"
             android:layout_marginStart="16dp"
             tools:text="Контактная информация"/>
+
 </android.support.constraint.ConstraintLayout>

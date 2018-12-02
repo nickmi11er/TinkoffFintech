@@ -1,82 +1,117 @@
 package ru.nickmiller.tinkofffintech.ui.profile
 
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.*
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import ru.nickmiller.tinkofffintech.BuildConfig
 import ru.nickmiller.tinkofffintech.R
-import ru.nickmiller.tinkofffintech.data.Resource
 import ru.nickmiller.tinkofffintech.data.entity.profile.map
-import ru.nickmiller.tinkofffintech.utils.find
+import ru.nickmiller.tinkofffintech.ui.MainActivity
+import ru.nickmiller.tinkofffintech.ui.login.LoginActivity
+import ru.nickmiller.tinkofffintech.utils.cookies.CookiesStore
 
 
 class ProfileFragment : Fragment() {
+
     val viewModel by viewModel<ProfileViewModel>()
-    lateinit var profileAvatar: ImageView
-    lateinit var profileName: TextView
-    lateinit var profileEmail: TextView
-    lateinit var recycler: RecyclerView
+    val cStore by inject<CookiesStore>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_profile, container, false)
-        profileAvatar = rootView.find(R.id.profile_avatar)
-        profileName = rootView.find(R.id.profile_name)
-        profileEmail = rootView.find(R.id.profile_email)
-        rootView.findViewById<View>(R.id.btn_logout).setOnClickListener {
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
 
-        }
-        recycler = rootView.find(R.id.profile_recycler)
-        recycler.isNestedScrollingEnabled = false
-        recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        observeData()
+    }
 
-        viewModel.profileObservable.observe(this, Observer { res ->
-            when (res?.status) {
-                Resource.Status.LOADING -> {
+
+    private fun initViews() {
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        profile_recycler.isNestedScrollingEnabled = false
+        profile_recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        profile_refresh.setOnRefreshListener { viewModel.getProfile(true) }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observeData() {
+        viewModel.dataObservable.observe(this, Observer { profile ->
+            root_view.visibility = View.VISIBLE
+
+            collapsing_toolbar.title = "${profile?.firstName} ${profile?.lastName}"
+            profile_name.text = "${profile?.firstName} ${profile?.lastName}"
+            profile_email.text = profile?.email
+            Glide.with(this)
+                .load(BuildConfig.MAIN_URL + profile?.avatar?.substring(1))
+                .into(profile_avatar)
+
+            val structuredProfile = profile?.map()
+
+            btn_edit_profile.setOnClickListener {
+                EditProfileActivity.start(context, profile)
+            }
+
+            val adapter =
+                structuredProfile?.let { prof ->
+                    ProfileAdapter.ProfileAdapterModel.transformList(prof)
+                }?.let { models ->
+                    ProfileAdapter(models)
                 }
-                Resource.Status.ERROR -> {
-                    Toast.makeText(context, res.error?.message, Toast.LENGTH_SHORT).show()
-                }
-                Resource.Status.SUCCESS -> {
-                    profileName.text = "${res.data?.firstName} ${res.data?.lastName}"
-                    profileEmail.text = res.data?.email
-                    Glide.with(this).load("https://fintech.tinkoff.ru" + res.data?.avatar).into(profileAvatar)
-                    val profile = res.data
-                    val structuredProfile = profile?.map()
 
-                    rootView.find<FloatingActionButton>(R.id.btn_edit_profile).setOnClickListener {
-                        val intent = Intent(context, EditProfileActivity::class.java)
-                        intent.putExtra("profile", profile)
-                        startActivity(intent)
-                    }
+            profile_recycler.adapter = adapter
+        })
 
-                    val adapter =
-                        structuredProfile?.let { prof -> ProfileAdapter.ProfileAdapterModel.transformList(prof) }
-                            ?.let { it2 ->
-                                ProfileAdapter(
-                                    it2
-                                )
-                            }
+        viewModel.errorsObservable.observe(this, Observer {
+            Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
+        })
 
-                    recycler.adapter = adapter
+        viewModel.loadingObservable.observe(this, Observer {
+            with(activity as MainActivity) {
+                if (it == true) {
+                    startProgress()
+                } else {
+                    profile_refresh.isRefreshing = false
+                    stopProgress()
                 }
             }
         })
+    }
 
-        return rootView
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_profile, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.profile_signout -> {
+                cStore.clearCookies()
+                startActivity(Intent(context, LoginActivity::class.java))
+                activity?.finish()
+            }
+        }
+        return true
     }
 }
