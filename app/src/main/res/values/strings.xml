@@ -1,12 +1,47 @@
 <resources>
     <string name="app_name">Tinkoff Fintech</string>
-
     <string name="sp_cookies">sp_cookies</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_login">ЛОГИН</string>
     <string name="hint_password">ПАРОЛЬ</string>
     <string name="btn_title_enter">Войти</string>
     <string name="btn_title_recover_password">Восстановить пароль</string>
+    <string name="course_stat_passed">Пройдено</string>
+    <string name="msg_edit">Править</string>
+    <string name="msg_fio">ФИО</string>
+    <string name="msg_birthday">Дата рождения</string>
+    <string name="msg_profile_summary">Пара слов о себе</string>
+    <string name="msg_cancel">Отменить</string>
+    <string name="msg_save">Сохранить</string>
+    <string name="mag_academic_progress">Успеваемость</string>
+    <string name="msg_details">Детали</string>
+    <string name="msg_rating">Рейтинг</string>
+    <string name="msg_overall_rating">Общий рейтинг</string>
+    <string name="msg_tests_passed">Пройдено тестов</string>
+    <string name="msg_homework_passed">Выполнено домашек</string>
+    <string name="msg_scores">балла</string>
+    <string name="msg_passed">Прошло</string>
+    <string name="msg_left">Осталось</string>
+    <string name="msg_living_city">Город проживания</string>
+    <string name="error_auth">Ошибка во время авторизации</string>
+    <string name="title_edit">Редактировать</string>
+    <string name="title_fintech_school">Финтех Школа</string>
+    <string name="title_internship">Стажировка</string>
+    <string name="title_school_courses">Курсы для школьников</string>
+    <string name="title_special_course">Спецкурс</string>
+    <string name="title_event_single">Мероприятие</string>
+    <string name="title_events_search">Поиск мероприятий</string>
+    <string name="title_events_actual">Актуальное</string>
+    <string name="title_events_archived">Прошедшие</string>
+    <string name="title_events">Мероприятия</string>
+    <string name="title_my_courses">Мои курсы</string>
+    <string name="title_profile">Профиль</string>
+    <string name="error_null_event_description">Нет описания мероприятия</string>
+    <string name="msg_ok">Понятно</string>
+    <string name="msg_exit">Выйти</string>
+    <string name="msg_sort">Сортировать</string>
+    <string name="msg_search">Поиск</string>
+    <string name="msg_sort_rating_des">Рейтинг по убыванию</string>
+    <string name="msg_sort_rating">Рейтинг по возрастанию</string>
+    <string name="error_null_user_info">Нет информации о пользователе</string>
 </resources>

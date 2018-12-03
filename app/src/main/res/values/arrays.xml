@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="soft_colors">
+        <item>@color/colorBlueSoft</item>
+        <item>@color/colorGreenSoft</item>
+        <item>@color/colorOrangeSoft</item>
+        <item>@color/colorRedSoft</item>
+        <item>@color/colorVioletSoft</item>
+    </array>
+
+    <array name="sort_progress_list">
+        <item>Рейтинг по убыванию</item>
+        <item>Рейтинг по возрастанию</item>
+    </array>
+</resources>

@@ -16,6 +16,16 @@
     <color name="colorOrangeSoft">#ffb191</color>
     <color name="colorVioletSoft">#b1a5ee</color>
     <color name="colorBlueSoft">#4db2ff</color>
+    <color name="colorGreySoft">#9299a2</color>
+
+    <color name="colorGrass">#cef7c2</color>
+    <color name="colorSkin">#ffe1d5</color>
+    <color name="colorWeakGrey">#ecf0f7</color>
+    <color name="colorWeakOrange">#ffefd3</color>
+    <color name="colorBlueSky">#d7e1fa</color>
+
+    <color name="colorBlue">#1959ff</color>
+    <color name="colorOrange">#ffa400</color>
 
 
     <color name="material_light_primary_text">#DE000000</color>
