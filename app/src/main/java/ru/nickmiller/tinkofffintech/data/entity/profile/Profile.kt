@@ -1,14 +1,17 @@
 package ru.nickmiller.tinkofffintech.data.entity.profile
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import ru.nickmiller.tinkofffintech.data.entity.ApiResponse
 
 
+@Entity
 @Parcelize
 data class Profile(
-    @SerializedName("id") val id: Int?,
+    @PrimaryKey @SerializedName("id") val id: Int?,
     @SerializedName("email") val email: String?,
     @SerializedName("first_name") val firstName: String?,
     @SerializedName("last_name") val lastName: String?,
@@ -31,11 +34,13 @@ data class Profile(
     @SerializedName("resume") val resume: String?,
     @SerializedName("notifications") val notifications: List<String>?,
     @SerializedName("admin") val admin: Boolean?,
-    @SerializedName("t_shirt_size") val tShirtSize: String?
+    @SerializedName("t_shirt_size") val tShirtSize: String?,
+    var lastUpdatedTime: Long = 0
 ) : ApiResponse(), Parcelable
 
 
 data class UserResponse(
     @SerializedName("user") val user: Profile?,
-    @SerializedName("status") val status: String?
+    @SerializedName("status") val status: String?,
+    @SerializedName("message") val message: String?
 )
