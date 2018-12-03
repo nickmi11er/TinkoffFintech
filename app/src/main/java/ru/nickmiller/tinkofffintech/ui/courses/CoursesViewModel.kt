@@ -1,39 +1,26 @@
 package ru.nickmiller.tinkofffintech.ui.courses
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import ru.nickmiller.tinkofffintech.data.Resource
-import ru.nickmiller.tinkofffintech.data.entity.course.CoursesResponse
+import ru.nickmiller.tinkofffintech.data.entity.course.Course
 import ru.nickmiller.tinkofffintech.data.repository.CoursesRepository
+import ru.nickmiller.tinkofffintech.ui.base.DataViewModel
 
 
-class CoursesViewModel(val repo: CoursesRepository) : ViewModel() {
-    private var disposable: Disposable? = null
-    val coursesObservable = MutableLiveData<Resource<CoursesResponse>>()
+class CoursesViewModel(val repo: CoursesRepository) : DataViewModel<List<Course>>() {
 
     init {
         getCourses()
     }
 
-    private fun getCourses() {
-        disposable = repo.getCourses()
-            .doOnSubscribe { coursesObservable.postValue(Resource.loading()) }
+    fun getCourses(refresh: Boolean = false) {
+        disposable = repo.getCourses(refresh)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                coursesObservable.postValue(it)
-            }, {
-                coursesObservable.postValue(Resource.error(it))
-            })
+            .doOnSubscribe { if (!refresh) loadingObservable.postValue(true) }
+            .subscribe(
+                { postData(it) },
+                { postError(it) }
+            )
     }
-
-
-    override fun onCleared() {
-        disposable?.dispose()
-        super.onCleared()
-    }
-
 }

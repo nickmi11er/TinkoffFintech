@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_margin="8dp"
+        app:cardCornerRadius="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginStart="16dp"
+                  android:text="@string/msg_rating"
+                  android:textColor="@color/colorTextMain"
+                  android:id="@+id/textView17"/>
+        <TextView
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCourseDetails"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/msg_details"/>
+
+        <LinearLayout
+                android:gravity="end"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/btnCourseDetails"
+                android:id="@+id/linearLayout">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/user_position"
+                    android:textColor="@color/colorTextMain"
+                    android:textSize="16sp"
+                    tools:text="2/30"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/user_tests"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="15/18"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorTextMain"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/user_full"
+                    android:textColor="@color/colorTextMain"
+                    android:textSize="16sp"
+                    tools:text="12/18"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                android:id="@+id/linearLayout2">
+
+
+            <TextView
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_laurel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/textView7"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorTextSecondary"
+                    android:text="@string/msg_overall_rating"/>
+            <TextView
+                    android:gravity="center_vertical"
+                    android:text="@string/msg_tests_passed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/textView8"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorTextSecondary"/>
+            <TextView
+                    android:gravity="center_vertical"
+                    android:text="@string/msg_homework_passed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:id="@+id/textView9"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorTextSecondary"/>
+
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stat_works_count"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/colorTextMain"
+                tools:text="20 занятий"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/stat_progress"/>
+
+        <ru.nickmiller.tinkofffintech.ui.component.CircleProgressBar
+                android:padding="6dp"
+                android:id="@+id/stat_progress"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                app:progressColor="@color/colorPrimary"
+                app:progressWidth="10dp"
+                app:progressBgColor="#eaecee"
+                app:progressStartAngel="-45"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scores_total"
+                android:textSize="20sp"
+                tools:text="35.45"
+                android:textColor="@color/colorTextMain"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toTopOf="@+id/stat_progress"
+                app:layout_constraintStart_toStartOf="@+id/stat_progress"
+                app:layout_constraintEnd_toEndOf="@+id/stat_progress"
+                app:layout_constraintBottom_toTopOf="@+id/textView12"/>
+        <TextView
+                app:layout_constraintTop_toBottomOf="@+id/scores_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12"
+                android:textSize="10sp"
+                android:text="@string/msg_scores"
+                android:textColor="@color/colorTextSecondary"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/stat_progress"
+                app:layout_constraintStart_toStartOf="@+id/stat_progress"
+                app:layout_constraintEnd_toEndOf="@+id/stat_progress"/>
+        <ProgressBar
+                android:progressDrawable="@drawable/progressbar_hor_drawable"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:id="@+id/progress"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/stat_works_count"
+                android:progress="0"/>
+        <TextView
+                android:text="@string/msg_passed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/progress"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/colorTextSecondary"/>
+        <TextView
+                android:text="@string/msg_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/progress"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/colorTextSecondary"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tasksPassed"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/colorTextMain"
+                tools:text="10 занятий"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tasksLeft"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView14"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorTextMain"
+                tools:text="10 занятий"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
