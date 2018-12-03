@@ -16,7 +16,7 @@ import kotlin.math.min
 
 class EventsFragment : BaseFragment() {
     val viewModel by viewModel<EventsViewModel>()
-    override var title = getString(R.string.title_events)
+    override var title = "Мероприятия"
     override val contentView = R.layout.fragment_events
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
