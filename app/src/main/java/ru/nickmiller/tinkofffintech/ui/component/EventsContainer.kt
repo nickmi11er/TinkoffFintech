@@ -1,4 +1,4 @@
-package ru.nickmiller.tinkofffintech.ui.events
+package ru.nickmiller.tinkofffintech.ui.component
 
 import android.content.Context
 import android.support.v7.widget.CardView
@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.TextView
 import ru.nickmiller.tinkofffintech.R
-import ru.nickmiller.tinkofffintech.data.entity.event.Event
+import ru.nickmiller.tinkofffintech.ui.events.EventsAdapter
 import ru.nickmiller.tinkofffintech.utils.find
 
 
