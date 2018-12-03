@@ -2,6 +2,7 @@ package ru.nickmiller.tinkofffintech.data.repository
 
 import io.reactivex.Observable
 import io.reactivex.functions.Function3
+import ru.nickmiller.tinkofffintech.BuildConfig
 import ru.nickmiller.tinkofffintech.ConnectionIsNotAvailable
 import ru.nickmiller.tinkofffintech.EmptyDbTableException
 import ru.nickmiller.tinkofffintech.data.Api
@@ -15,8 +16,8 @@ import ru.nickmiller.tinkofffintech.utils.NetworkUtil
 
 class CoursesRepository(val api: Api, val db: AppDatabase, val networkUtil: NetworkUtil) {
 
-    private fun courseInfoUrl(courseId: String) = "https://fintech.tinkoff.ru/api/course/$courseId/grades"
-    private fun courseAboutUrl(courseId: String) = "https://fintech.tinkoff.ru/api/course/$courseId/about"
+    private fun courseInfoUrl(courseId: String) = BuildConfig.API_URL + "course/$courseId/grades"
+    private fun courseAboutUrl(courseId: String) = BuildConfig.API_URL + "course/$courseId/about"
 
 
     fun getCourses(update: Boolean = false): Observable<Resource<List<Course>>> =
@@ -61,17 +62,6 @@ class CoursesRepository(val api: Api, val db: AppDatabase, val networkUtil: Netw
                         Resource.success(it)
                     }
                     .toObservable()
-            } else {
-                Observable.just(Resource.error(ConnectionIsNotAvailable()))
-            }
-        }
-
-
-    fun getCourseInfo(courseId: String) = networkUtil.isConnected()
-        .flatMap { connected ->
-            if (connected) {
-                api.getCourseInfo("https://fintech.tinkoff.ru/api/course/$courseId/grades")
-                    .map { Resource.success(it) }
             } else {
                 Observable.just(Resource.error(ConnectionIsNotAvailable()))
             }
