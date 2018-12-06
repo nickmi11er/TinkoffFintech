@@ -6,10 +6,8 @@
         android:layout_height="wrap_content">
 
     <com.rengwuxian.materialedittext.MaterialEditText
-            android:overScrollMode="always"
-            android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
-            android:inputType="textMultiLine"
+            android:inputType="textMultiLine|textNoSuggestions"
             app:met_floatingLabelAnimating="true"
             android:id="@+id/itemContent"
             android:paddingTop="8dp"
@@ -24,7 +22,6 @@
             android:textSize="16sp"
             android:textColor="@color/colorTextSecondary"
             app:layout_constraintEnd_toEndOf="parent"
-            android:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
