@@ -14,7 +14,6 @@ class AuthInterceptor(val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())
         if (originalResponse.code() == 403) {
-            Toast.makeText(context, context.getString(R.string.error_auth), Toast.LENGTH_SHORT).show()
             context.startActivity(Intent(context, LoginActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             })
