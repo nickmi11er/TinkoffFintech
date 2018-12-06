@@ -67,7 +67,7 @@ class ProgressListAdapter(var grades: List<Grade>) :
                     grades
                 } else {
                     grades.filter {
-                        it.student?.contains(charString) ?: false
+                        it.student?.contains(charString, true) ?: false
                     }
                 }
                 return FilterResults().apply { values = gradesFiltered }
