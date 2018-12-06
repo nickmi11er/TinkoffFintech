@@ -15,5 +15,7 @@ class InternalServerError : BaseException(603, "Ошибка сервера")
 
 class EmptyDbTableException : BaseException(604, "Данные не найдены")
 
+class DataNotFoundException : BaseException(404, "Некоторая информация была не найдена")
+
 
  

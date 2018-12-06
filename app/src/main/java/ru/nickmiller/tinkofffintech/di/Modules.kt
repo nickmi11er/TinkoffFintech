@@ -36,7 +36,7 @@ val mainModule: Module = module {
     viewModel { EventsViewModel(get()) }
     viewModel { CoursesViewModel(get()) }
     single { LoginRepository(get(), get(), get()) }
-    single { ProfileRepository(get(), get(), get()) }
+    single { ProfileRepository(get(), get(), get(), get()) }
     single { EventsRepository(get(), get(), get()) }
     single { CoursesRepository(get(), get(), get()) }
 }

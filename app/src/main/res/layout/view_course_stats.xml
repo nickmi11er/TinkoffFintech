@@ -11,24 +11,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <TextView android:layout_width="wrap_content"
+        <TextView android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintTop_toTopOf="parent"
                   android:layout_marginTop="16dp"
                   android:layout_marginStart="16dp"
-                  android:text="@string/msg_rating"
+                  tools:text="Android"
                   android:textColor="@color/colorTextMain"
-                  android:id="@+id/textView17"/>
+                  android:id="@+id/courseName" android:layout_marginEnd="8dp"
+                  app:layout_constraintEnd_toStartOf="@+id/btnCourseProgress" android:textStyle="bold"/>
         <TextView
+                android:padding="8dp"
+                android:foreground="?attr/selectableItemBackground"
                 android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnCourseDetails"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/msg_details"/>
 
@@ -40,7 +43,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/btnCourseDetails"
+                app:layout_constraintTop_toBottomOf="@+id/courseName"
                 android:id="@+id/linearLayout">
 
             <TextView
@@ -219,6 +222,25 @@
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorTextMain"
                 tools:text="10 занятий"/>
+
+
+        <View android:layout_width="1dp"
+              android:layout_height="16dp"
+              android:background="@color/colorPrimary" app:layout_constraintEnd_toStartOf="@+id/btnCourseDetails"
+              app:layout_constraintTop_toTopOf="@+id/btnCourseDetails"
+              app:layout_constraintBottom_toBottomOf="@+id/btnCourseDetails" android:id="@+id/view"/>
+
+        <TextView
+                android:padding="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:textAllCaps="true"
+                android:text="Успеваемость"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCourseProgress"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btnCourseDetails"/>
 
     </android.support.constraint.ConstraintLayout>
 

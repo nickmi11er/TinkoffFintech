@@ -80,12 +80,16 @@ private fun getDateGap(dtStart: String?, dtEnd: String?): String {
     cal.time = sdfFintech.parse(dtStart)
     val yearStart = cal.get(Calendar.YEAR)
     val monthStart = cal.get(Calendar.MONTH)
-    val monthStartName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale("ru"))
+    val monthStartName =
+        if (monthStart == 4) "Май"
+        else cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale("ru"))
 
     cal.time = sdfFintech.parse(dtEnd)
     val yearEnd = cal.get(Calendar.YEAR)
     val monthEnd = cal.get(Calendar.MONTH)
-    val monthEndName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale("ru"))
+    val monthEndName =
+        if (monthEnd == 4) "Май"
+        else cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale("ru"))
 
     return if (yearStart == yearEnd) {
         if (monthStart == monthEnd) "$monthStartName $yearStart г."

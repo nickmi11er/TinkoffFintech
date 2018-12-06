@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import ru.nickmiller.tinkofffintech.AuthorizationError
 import ru.nickmiller.tinkofffintech.data.Resource
 import ru.nickmiller.tinkofffintech.data.entity.profile.Profile
 import ru.nickmiller.tinkofffintech.data.repository.LoginRepository
@@ -21,7 +22,7 @@ class LoginViewModel(val repo: LoginRepository) : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loginObserver.postValue(Resource.loading()) }
                 .subscribe({ loginObserver.postValue(it) }, {
-                    loginObserver.postValue(Resource.error(RuntimeException("Ошибка авторизации")))
+                    loginObserver.postValue(Resource.error(AuthorizationError()))
                 })
         }
     }
