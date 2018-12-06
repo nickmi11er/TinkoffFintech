@@ -16,6 +16,8 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import ru.nickmiller.tinkofffintech.BuildConfig
 import ru.nickmiller.tinkofffintech.R
+import ru.nickmiller.tinkofffintech.data.entity.profile.filterNotEmpty
+import ru.nickmiller.tinkofffintech.data.entity.profile.flattenBlocks
 import ru.nickmiller.tinkofffintech.data.entity.profile.map
 import ru.nickmiller.tinkofffintech.ui.MainActivity
 import ru.nickmiller.tinkofffintech.ui.login.LoginActivity
@@ -50,12 +52,37 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         profile_recycler.isNestedScrollingEnabled = false
         profile_recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        profile_refresh.setOnRefreshListener { viewModel.getProfile(true) }
+        profile_refresh.setOnRefreshListener { viewModel.updateProfile(true) }
     }
 
     @SuppressLint("SetTextI18n")
     private fun observeData() {
-        viewModel.dataObservable.observe(this, Observer { profile ->
+//        viewModel.dataObservable.observe(this, Observer { profile ->
+//            root_view.visibility = View.VISIBLE
+//
+//            collapsing_toolbar.title = "${profile?.firstName} ${profile?.lastName}"
+//            profile_name.text = "${profile?.firstName} ${profile?.lastName}"
+//            profile_email.text = profile?.email
+//            Glide.with(this)
+//                .load(BuildConfig.MAIN_URL + profile?.avatar?.substring(1))
+//                .into(profile_avatar)
+//
+//            val profileBlocks = profile?.map()
+//
+//            btn_edit_profile.setOnClickListener {
+//                EditProfileActivity.start(context, profile)
+//            }
+//
+//            val blocks = profileBlocks?.filterNotEmpty()?.flattenBlocks()
+//            val adapter = blocks?.let { ProfileAdapter(blocks) }
+//            profile_recycler.adapter = adapter
+//        })
+
+        viewModel.errorsObservable.observe(this, Observer {
+            Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.getDataObservable()?.observe(this, Observer { profile ->
             root_view.visibility = View.VISIBLE
 
             collapsing_toolbar.title = "${profile?.firstName} ${profile?.lastName}"
@@ -65,24 +92,15 @@ class ProfileFragment : Fragment() {
                 .load(BuildConfig.MAIN_URL + profile?.avatar?.substring(1))
                 .into(profile_avatar)
 
-            val structuredProfile = profile?.map()
+            val profileBlocks = profile?.map()
 
             btn_edit_profile.setOnClickListener {
                 EditProfileActivity.start(context, profile)
             }
 
-            val adapter =
-                structuredProfile?.let { prof ->
-                    ProfileAdapter.ProfileAdapterModel.transformList(prof)
-                }?.let { models ->
-                    ProfileAdapter(models)
-                }
-
+            val blocks = profileBlocks?.filterNotEmpty()?.flattenBlocks()
+            val adapter = blocks?.let { ProfileAdapter(blocks) }
             profile_recycler.adapter = adapter
-        })
-
-        viewModel.errorsObservable.observe(this, Observer {
-            Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
         })
 
         viewModel.loadingObservable.observe(this, Observer {
