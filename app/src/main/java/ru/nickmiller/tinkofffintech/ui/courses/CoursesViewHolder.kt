@@ -29,6 +29,7 @@ class ActiveCoursesViewHolder(itemView: View) : CoursesViewHolder(itemView) {
                     it.grades != null &&
                     it.grades.firstOrNull { it.studentId == item.userId } != null
         }?.let { cInfo ->
+            courseName.text = item.title
             val userGrades = cInfo.grades?.firstOrNull { it.studentId == item.userId }
             if (userGrades != null) {
 
@@ -73,7 +74,7 @@ class ActiveCoursesViewHolder(itemView: View) : CoursesViewHolder(itemView) {
         coursesDates?.forEach {
             cal.time = it
             cal.set(Calendar.HOUR, 22)
-            if (currentDate.after(it)) {
+            if (currentDate.after(cal.time)) {
                 passed++
             }
         }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_course_stats.view.*
 import ru.nickmiller.tinkofffintech.R
 import ru.nickmiller.tinkofffintech.data.entity.course.Course
+import ru.nickmiller.tinkofffintech.ui.courses.progress.ProgressListActivity
 
 
 class CoursesAdapter(val courses: List<Course>) : RecyclerView.Adapter<CoursesViewHolder>() {
@@ -19,6 +20,9 @@ class CoursesAdapter(val courses: List<Course>) : RecyclerView.Adapter<CoursesVi
         holder.bind(courses[position])
         holder.itemView.btnCourseDetails.setOnClickListener {
             CourseDetailsActivity.start(it.context, courses[position])
+        }
+        holder.itemView.btnCourseProgress.setOnClickListener {
+            ProgressListActivity.start(holder.itemView.context, courses[position])
         }
     }
 
