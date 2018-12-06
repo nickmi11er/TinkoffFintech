@@ -1,5 +1,6 @@
 package ru.nickmiller.tinkofffintech.data.cache.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import ru.nickmiller.tinkofffintech.data.entity.profile.Profile
 
@@ -15,4 +16,7 @@ interface ProfileDao {
 
     @Query("DELETE FROM profile")
     fun delete()
+
+    @Query("SELECT * FROM profile LIMIT 1")
+    fun getProfileLD(): LiveData<Profile?>
 }

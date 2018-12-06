@@ -20,7 +20,7 @@ data class Event(
     @SerializedName("event_type") val eventType: EventType?,
     @SerializedName("custom_date") val customDate: String?,
     @SerializedName("place") val place: String?,
-    @SerializedName("url") val url: String?,
+    @SerializedName("url") var url: String?,
     @SerializedName("url_external") val urlExternal: Boolean?,
     @SerializedName("display_button") val displayButton: Boolean?,
     @SerializedName("url_text") val urlText: String?,

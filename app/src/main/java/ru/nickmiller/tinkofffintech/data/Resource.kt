@@ -12,6 +12,10 @@ data class Resource<out T>(val status: Status, val data: T?, val error: BaseExce
             return Resource(Status.ERROR, null, err)
         }
 
+        fun <T> error(t: Throwable): Resource<T> {
+            return error(BaseException(t))
+        }
+
         fun <T> loading(): Resource<T> {
             return Resource(Status.LOADING, null, null)
         }

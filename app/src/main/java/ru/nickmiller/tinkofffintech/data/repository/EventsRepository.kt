@@ -46,7 +46,7 @@ class EventsRepository(val api: Api, val db: AppDatabase, val networkUtil: Netwo
                             Observable.just(event).zipWith(api.getEventInfo("api/event${event.url}"),
                                 BiFunction<Event, EventInfo, Event> { event, ei ->
                                     event.apply { eventInfo = ei }
-                                })
+                                }).onErrorReturn { event.apply { url = null } }
                         } else Observable.just(event)
                     }
                     .toList()

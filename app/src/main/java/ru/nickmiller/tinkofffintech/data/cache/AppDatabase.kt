@@ -11,7 +11,7 @@ import ru.nickmiller.tinkofffintech.data.entity.event.Event
 import ru.nickmiller.tinkofffintech.data.entity.profile.Profile
 
 
-@Database(entities = [Profile::class, Event::class, Course::class], version = 4)
+@Database(entities = [Profile::class, Event::class, Course::class], version = 5)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
