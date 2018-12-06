@@ -7,10 +7,13 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.EditText
 import ru.nickmiller.tinkofffintech.R
 
 
@@ -52,5 +55,14 @@ fun softColorsArray() =
         R.color.colorRedSoft,
         R.color.colorVioletSoft
     )
+
+
+fun EditText.onChange(cb: (String) -> Unit) {
+    this.addTextChangedListener(object: TextWatcher {
+        override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    })
+}
  
  
